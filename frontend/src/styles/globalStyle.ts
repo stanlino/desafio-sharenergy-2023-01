@@ -13,10 +13,14 @@ export const GlobalStyle = createGlobalStyle`
     --text-color: #474747;
   }
 
-  body {
+  body, #root {
     min-height: 100vh;
     min-width: 100vw;
 
     background-color: var(--background-color);
+
+    display: flex;
+
+    font-family: 'Poppins', sans-serif;
   }
 `
