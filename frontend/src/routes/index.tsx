@@ -4,7 +4,8 @@ import { Sidebar } from '../components/sidebar'
 
 import { NotFoundPage } from '../pages/404'
 import { UsersPage } from '../pages/users'
-import { LoginScreen } from '../pages/login'
+import { LoginPage } from '../pages/login'
+import { HTTPCatPage } from '../pages/http-cat'
 
 export function AppRoutes (): JSX.Element {
   return (
@@ -12,12 +13,12 @@ export function AppRoutes (): JSX.Element {
       <Sidebar />
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="/" element={<LoginScreen />} />
+        <Route path="/" element={<LoginPage />} />
         <Route>
           <Route path="/users" element={<UsersPage />}>
             <Route path=':page' element={<UsersPage />} />
           </Route>
-          <Route path="/http-cat" element={<div />} />
+          <Route path="/http-cat" element={<HTTPCatPage />} />
           <Route path="/random-dog" element={<div />} />
           <Route path="/clients" element={<div />} />
           </Route>

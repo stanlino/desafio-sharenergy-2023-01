@@ -26,10 +26,7 @@ export function UsersPage (): JSX.Element {
   return (
     <Container>
       <header>
-        <input onChange={e => setSearch(e.target.value)} placeholder='Pesquise por nome, email ou usuário' type="text" />
-        <button>
-          Pesquisar
-        </button>
+        <input onChange={e => setSearch(e.target.value)} placeholder='Filtre por nome, email ou usuário' type="text" />
       </header>
       <Table>
         <thead>

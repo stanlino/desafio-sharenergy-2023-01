@@ -2,7 +2,7 @@ import { FormEvent, useRef } from 'react'
 import { BiUserCircle, BiLockAlt } from 'react-icons/bi'
 import { Button, Container, FormHeader } from './styles'
 
-export function LoginScreen (): JSX.Element {
+export function LoginPage (): JSX.Element {
   const usernameInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
 

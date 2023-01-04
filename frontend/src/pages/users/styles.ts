@@ -28,22 +28,6 @@ export const Container = styled.main`
 
       outline-color: var(--primary-color);
     }
-
-    button {
-      min-width: 5rem;
-      border-radius: 8px;
-      border: none;
-
-      cursor: pointer;
-
-      background-color: var(--primary-color);
-      color: white;
-      font-weight: 700;
-
-      &:hover {
-        background-color: ${darken(0.1, '#1BA2A1')};
-      }
-    }
   }
 `
 
