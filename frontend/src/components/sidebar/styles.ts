@@ -1,5 +1,7 @@
 import { darken } from 'polished'
-import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   width: 250px;
@@ -59,35 +61,6 @@ export const Nav = styled.nav`
   width: 100%;
 
   flex: 1;
-
-  a {
-    text-decoration: none;
-    color: var(--text-color);
-    
-    display: flex;
-    flex: 1;
-
-    height: 40px;
-    border-radius: 8px;
-
-    padding: 0 8px;
-
-    align-items: center;
-
-    gap: 0.5rem;
-
-    margin: 8px 0;
-
-    transition: all .4s;
-
-    &:hover {
-      background-color: #C2C2C2;
-    }
-    
-    @media (max-width: 720px) {
-      justify-content: center;
-    }
-  }
   
   li {
     list-style: none;
@@ -97,6 +70,50 @@ export const Nav = styled.nav`
     span {
       display: none;
     }
+  }
+`
+
+interface Aprops {
+  focused: boolean
+}
+
+export const A = styled(Link) <Aprops>`
+  text-decoration: none;
+
+  ${({ focused }) => {
+    if (focused) {
+      return css`
+        color: var(--primary-color);
+      `
+    }
+
+    return css`
+      color: var(--text-color);
+    `
+  }}
+
+  display: flex;
+  flex: 1;
+
+  height: 40px;
+  border-radius: 8px;
+
+  padding: 0 8px;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  margin: 8px 0;
+
+  transition: all .4s;
+
+  &:hover {
+    background-color: #C2C2C2;
+  }
+  
+  @media (max-width: 720px) {
+    justify-content: center;
   }
 `
 

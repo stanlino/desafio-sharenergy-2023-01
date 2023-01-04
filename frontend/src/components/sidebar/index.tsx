@@ -1,10 +1,18 @@
 import { FaCat, FaDog, FaUsers } from 'react-icons/fa'
 import { BsBoxArrowLeft } from 'react-icons/bs'
 
-import { Container, Content, Footer, Nav } from './styles'
-import { Link } from 'react-router-dom'
+import { A, Container, Content, Footer, Nav } from './styles'
+import { useLocation } from 'react-router-dom'
 
-export function Sidebar (): JSX.Element {
+export function Sidebar (): JSX.Element | null {
+  const { pathname } = useLocation()
+
+  function isFocused (path: string): boolean {
+    return pathname.includes(path)
+  }
+
+  if (pathname === '/') return null
+
   return (
     <Container>
       <Content>
@@ -16,36 +24,36 @@ export function Sidebar (): JSX.Element {
         <Nav>
           <ul>
             <li>
-              <Link to='/users'>
+              <A to='/users' focused={isFocused('/users')}>
                 <FaUsers />
                 <span>
                   Usuários
                 </span>
-              </Link>
+              </A>
             </li>
             <li>
-              <Link to="/http-cat">
+              <A to="/http-cat" focused={isFocused('/http-cat')}>
                 <FaCat />
                 <span>
                   HTTP Gatos
                 </span>
-              </Link>
+              </A>
             </li>
             <li>
-              <Link to="/random-dog">
+              <A to="/random-dog" focused={isFocused('/random-dog')}>
                 <FaDog />
                 <span>
                   Cães aleatórios
                 </span>
-              </Link>
+              </A>
             </li>
             <li>
-              <Link to="/clients">
+              <A to="/clients" focused={isFocused('/clients')}>
                 <FaUsers />
                 <span>
                   Clientes
                 </span>
-              </Link>
+              </A>
             </li>
           </ul>
         </Nav>
