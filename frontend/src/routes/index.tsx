@@ -7,6 +7,7 @@ import { UsersPage } from '../pages/users'
 import { LoginPage } from '../pages/login'
 import { HTTPCatPage } from '../pages/http-cat'
 import { RandomDogPage } from '../pages/random-dog'
+import { ClientsPage } from '../pages/clients'
 
 export function AppRoutes (): JSX.Element {
   return (
@@ -21,7 +22,7 @@ export function AppRoutes (): JSX.Element {
           </Route>
           <Route path="/http-cat" element={<HTTPCatPage />} />
           <Route path="/random-dog" element={<RandomDogPage />} />
-          <Route path="/clients" element={<div />} />
+          <Route path="/clients" element={<ClientsPage />} />
           </Route>
       </Routes>
     </BrowserRouter>
