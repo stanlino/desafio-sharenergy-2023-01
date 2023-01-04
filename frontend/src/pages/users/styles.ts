@@ -48,6 +48,10 @@ export const Container = styled.main`
 `
 
 export const Table = styled.table`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
   tr {
     display: grid;
     grid-template-columns: 3fr 4fr 3fr 1fr;
