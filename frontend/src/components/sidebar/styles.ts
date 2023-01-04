@@ -5,12 +5,9 @@ export const Container = styled.div`
   width: 250px;
   height: 100%;
 
-  background-color: #E6E6E6;
+  background-color: #f4f4f4;
 
-  display: flex;
-  flex-direction: column;
-
-  padding: 16px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,.2);
 
   header {
     display: flex;
@@ -140,5 +137,25 @@ export const Footer = styled.footer`
     span {
       display: none;
     }
+  }
+`
+
+export const Content = styled.div`
+  position: fixed;
+
+  left: 0;
+  top: 0;
+
+  width: 250px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px;
+
+  @media (max-width: 720px) {
+    width: 50px;
+    padding: 4px;
   }
 `

@@ -15,7 +15,7 @@ export function redirecIfUser (): null {
   const user = true
 
   if (user) {
-    throw redirect('/home')
+    throw redirect('/users')
   }
 
   return null

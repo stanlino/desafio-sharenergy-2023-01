@@ -8,21 +8,22 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --background-color: #ffffff;
+    --background-color: #f4f4f4;
     --primary-color: #1BA2A1;
     --text-color: #474747;
   }
 
   body, #root {
     min-height: 100vh;
-    min-width: 100vw;
 
     background-color: var(--background-color);
 
     display: flex;
 
+    flex: 1;
+
     font-family: 'Poppins', sans-serif;
 
-    color: var(--text-color)
+    color: var(--text-color);
   }
 `

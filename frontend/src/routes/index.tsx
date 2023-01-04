@@ -1,47 +1,27 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Sidebar } from '../components/sidebar'
 
 import { NotFoundPage } from '../pages/404'
+import { UsersPage } from '../pages/users'
 import { LoginScreen } from '../pages/login'
 
-import { redirecIfUser, redirectIfNotUser } from './redirects'
-
-const appRoutes = createBrowserRouter([
-  {
-    path: '*',
-    element: <NotFoundPage />
-  },
-  {
-    path: '/',
-    element: <LoginScreen />,
-    loader: redirecIfUser
-  },
-  {
-    path: '/home',
-    element: <div />,
-    loader: redirectIfNotUser
-  },
-  {
-    path: 'http-cat',
-    element: <div />,
-    loader: redirectIfNotUser
-  },
-  {
-    path: 'random-dog',
-    element: <div />,
-    loader: redirectIfNotUser
-  },
-  {
-    path: 'users',
-    element: <div />,
-    loader: redirectIfNotUser
-  }
-])
-
-export function Routes (): JSX.Element {
-  return <>
-    <Sidebar />
-    <RouterProvider router={appRoutes} />
-  </>
+export function AppRoutes (): JSX.Element {
+  return (
+    <BrowserRouter>
+      <Sidebar />
+      <Routes>
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<LoginScreen />} />
+        <Route>
+          <Route path="/users" element={<UsersPage />}>
+            <Route path=':page' element={<UsersPage />} />
+          </Route>
+          <Route path="/http-cat" element={<div />} />
+          <Route path="/random-dog" element={<div />} />
+          <Route path="/clients" element={<div />} />
+          </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
