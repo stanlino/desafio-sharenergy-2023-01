@@ -9,5 +9,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log('🔥 Servidor rodando na porta 3333');
+  console.log(`🔥 Servidor rodando na porta ${PORT}`);
 });
