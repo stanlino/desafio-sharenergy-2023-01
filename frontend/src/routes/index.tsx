@@ -9,21 +9,26 @@ import { HTTPCatPage } from '../pages/http-cat'
 import { RandomDogPage } from '../pages/random-dog'
 import { ClientsPage } from '../pages/clients'
 
+import { ProtectedRoutes } from './protected-routes'
+import { ProtectedLogin } from './protected-login'
+
 export function AppRoutes (): JSX.Element {
   return (
     <BrowserRouter>
       <Sidebar />
       <Routes>
-        <Route path="*" element={<NotFoundPage />} />
-        <Route path="/" element={<LoginPage />} />
-        <Route>
+        <Route element={<ProtectedLogin />}>
+          <Route path="/" element={<LoginPage />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="*" element={<NotFoundPage />} />
           <Route path="/users" element={<UsersPage />}>
             <Route path=':page' element={<UsersPage />} />
           </Route>
           <Route path="/http-cat" element={<HTTPCatPage />} />
           <Route path="/random-dog" element={<RandomDogPage />} />
           <Route path="/clients" element={<ClientsPage />} />
-          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   )
