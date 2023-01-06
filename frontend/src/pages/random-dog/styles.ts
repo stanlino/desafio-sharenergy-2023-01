@@ -45,7 +45,7 @@ export const Button = styled.button`
 
   color: white;
 
-  cursor: pointer;
+  cursor: ${({ disabled = false }) => disabled ? 'auto' : 'pointer'};
 
   &:hover {
     background-color: ${({ disabled = false }) => disabled ? 'grey' : darken(0.1, '#1BA2A1')};
