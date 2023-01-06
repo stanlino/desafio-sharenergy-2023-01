@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from '../providers/auth'
+import { useUserStore } from '../store/userStore'
 
 export function ProtectedLogin (): JSX.Element {
-  const { user } = useAuth()
+  const { username } = useUserStore()
 
-  if (user != null) return <Navigate to={ '/users' } />
+  if (username != null) return <Navigate to={ '/users' } />
 
   return <Outlet />
 }

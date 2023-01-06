@@ -33,7 +33,7 @@ export class AuthenticateUserUseCase {
     const passwordMatch = await compare(password, user.password)
 
     if (!passwordMatch) {
-      throw new AppError('Incorrect credentials!', 400)
+      throw new AppError('Incorrect credentials!', 301)
     }
 
     const {

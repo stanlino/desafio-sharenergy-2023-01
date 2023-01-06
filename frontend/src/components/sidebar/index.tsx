@@ -4,11 +4,18 @@ import { BsBoxArrowLeft } from 'react-icons/bs'
 import { A, Container, Content, Footer, Nav } from './styles'
 import { useLocation } from 'react-router-dom'
 
+import { useUserStore } from '../../store/userStore'
+
 export function Sidebar (): JSX.Element | null {
   const { pathname } = useLocation()
+  const { signOut, username } = useUserStore(state => state)
 
   function isFocused (path: string): boolean {
     return pathname.includes(path)
+  }
+
+  function handleLogOut (): void {
+    signOut()
   }
 
   if (pathname === '/') return null
@@ -58,8 +65,8 @@ export function Sidebar (): JSX.Element | null {
           </ul>
         </Nav>
         <Footer>
-          <span>@jonasRibeiro</span>
-          <button>
+          <span>@{username}</span>
+          <button onClick={handleLogOut}>
             <BsBoxArrowLeft />
             <span>
               Sair

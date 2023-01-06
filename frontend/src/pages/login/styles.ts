@@ -22,7 +22,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
-    border: 1px solid #ececec;
+    border: 1px solid #ccc;
 
     padding: 8px 16px;
 
@@ -69,6 +69,13 @@ export const Container = styled.div`
       }
     }
 
+    .error {
+      color: red;
+      align-self: center;
+      margin: 8px 0;
+      font-weight: 600;
+    }
+
     .input-checkbox-label {
       display: flex;
       flex-direction: row;
@@ -111,6 +118,8 @@ export const Button = styled.button.attrs({
   outline: 0;
   border: 0;
   border-radius: 8px;
+
+  margin-bottom: 8px;
 
   font-size: 18px;
 

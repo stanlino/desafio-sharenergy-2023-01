@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from '../providers/auth'
+import { useUserStore } from '../store/userStore'
 
 export function ProtectedRoutes (): JSX.Element {
-  const { user } = useAuth()
+  const { username } = useUserStore()
 
-  if (user == null) return <Navigate to={'/'} />
+  if (username == null) return <Navigate to={'/'} />
 
   return <Outlet />
 }
