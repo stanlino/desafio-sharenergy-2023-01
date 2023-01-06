@@ -12,3 +12,12 @@ model users {
   password String
   username String @unique
 }
+
+model clients {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  email   String @unique
+  phone   String
+  address String
+  cpf     String @unique
+}
