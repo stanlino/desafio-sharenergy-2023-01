@@ -1,3 +1,6 @@
+import 'reflect-metadata'
+import 'dotenv/config'
+
 import { AppError } from "../../../errors/AppError";
 import { UsersRepositoryInMemory } from "../repositories/in-memory/UsersRepository";
 import { IUsersRepository } from "../repositories/IUsers";
@@ -15,8 +18,8 @@ describe('Authenticate User', () => {
 
   it('Should be able autenticate a user', async () => {
     const response = await authenticateUserUseCase.execute({
-      username: 'stanley',
-      password: '123456'
+      username: 'desafiosharenergy',
+      password: 'sh@r3n3rgy'
     })
 
     expect(response).toHaveProperty('token')
@@ -25,7 +28,7 @@ describe('Authenticate User', () => {
   it('Should not be able autenticate a user with incorrect password', () => {
     expect(async () => {
       const response = await authenticateUserUseCase.execute({
-        username: 'stanley',
+        username: 'desafiosharenergy',
         password: '12345'
       })
     }).rejects.toBeInstanceOf(AppError)

@@ -8,8 +8,8 @@ export class UsersRepositoryInMemory implements IUsersRepository {
   constructor() {
     this.users = [{
       id: '123456',
-      username: 'stanley',
-      password: '$2a$08$hMB88ekHqEjc1Nc8CM5Bsudl2OaaQZ8XLgHXjbsZYbXydR.RVSZo2'
+      username: 'desafiosharenergy',
+      password: '$2a$08$xNtqPDkgVruRuQk2keXXcemDoAhp24n0CsrYZgth3sbjNVe/uvGfK'
     }]
   }
 
