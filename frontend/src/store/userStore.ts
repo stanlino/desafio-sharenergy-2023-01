@@ -8,7 +8,6 @@ import Cookies from 'js-cookie'
 interface SetNewTokenProps {
   token: string
   refreshToken: string
-  persist: boolean
 }
 
 interface SignInRequest {
@@ -33,9 +32,9 @@ export const useUserStore = create<UserStore, [
 ]>(
   persist(
     (set) => ({
-      username: Cookies.get('username') || null,
-      token: Cookies.get('token') || null,
-      refreshToken: Cookies.get('refreshToken') || null,
+      username: Cookies.get('username') ?? null,
+      token: Cookies.get('token') ?? null,
+      refreshToken: Cookies.get('refreshToken') ?? null,
       setNewToken: ({ token, refreshToken }: SetNewTokenProps) => set({
         token,
         refreshToken
@@ -48,9 +47,7 @@ export const useUserStore = create<UserStore, [
           })
 
           if (persist) {
-            Cookies.set('username', data.username, {
-              expires: 30
-            })
+            Cookies.set('username', data.username)
 
             Cookies.set('token', data.token, {
               expires: 30
@@ -69,7 +66,6 @@ export const useUserStore = create<UserStore, [
 
           return 200
         } catch (err) {
-          console.log(err)
           if (err instanceof AxiosError) {
             if (err.response?.status != null) {
               return err.response?.status

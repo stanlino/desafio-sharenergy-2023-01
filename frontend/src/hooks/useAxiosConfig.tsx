@@ -4,6 +4,7 @@ import { useMemo, useEffect } from 'react'
 import axios, { AxiosError } from 'axios'
 import { useUserStore } from '../store/userStore'
 import { api } from '../services/api'
+import Cookies from 'js-cookie'
 
 export function useAxiosConfig (): void {
   const { token, refreshToken, setNewToken, signOut } = useUserStore(state => state)
@@ -32,7 +33,13 @@ export function useAxiosConfig (): void {
             token: response.data.token
           })
 
-          // api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`
+          Cookies.set('token', response.data.token, {
+            expires: 30
+          })
+
+          Cookies.set('refreshToken', response.data.refresh_token, {
+            expires: 30
+          })
 
           if (error.response?.config.headers === undefined) return
 

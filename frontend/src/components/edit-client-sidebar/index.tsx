@@ -17,8 +17,6 @@ interface EditClientSidebarProps {
 export function EditClientSidebar ({ isOpen, data, close, onUpdate }: EditClientSidebarProps): JSX.Element {
   const [editable, setEditable] = useState(false)
 
-  console.log(data)
-
   const userNameInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
   const userEmailInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
   const userPhoneInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
