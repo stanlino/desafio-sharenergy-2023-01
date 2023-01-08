@@ -1,59 +1,82 @@
+/* eslint-disable @typescript-eslint/promise-function-async */
 import { useState } from 'react'
-import { MdRemoveRedEye, MdDelete, MdOutlineClose } from 'react-icons/md'
-import { Actions, Clients, Container, Form, Main, Sidebar } from './styles'
+import { MdRemoveRedEye, MdDelete } from 'react-icons/md'
+import { toast } from 'react-toastify'
+import { EditClientSidebar } from '../../components/edit-client-sidebar'
+import { RegisterClientSidebar } from '../../components/register-client-sidebar'
+import { ClientDTO } from '../../dtos/Client'
+import { useRequestClients } from '../../hooks/useRequest'
+import { api } from '../../services/api'
+import { Actions, Clients, Container, Main } from './styles'
 
 export function ClientsPage (): JSX.Element {
-  const [sidebarVisible, setSidebarVisible] = useState(false)
+  const [currentClient, setCurrentClient] = useState<ClientDTO | null>(null)
 
-  function toggleSidebar (): void {
-    setSidebarVisible(visible => !visible)
+  const [registerClientSidebarOpen, setRegisterClientSidebarOpen] = useState(false)
+
+  const { clients, loading, addClient, removeClient } = useRequestClients()
+  console.log(clients)
+
+  async function deleteClient (id: string): Promise<void> {
+    await toast.promise(
+      api.delete(`/clients/${id}`),
+      {
+        pending: {
+          render () {
+            return 'Removendo cliente'
+          }
+        },
+        error: {
+          render () {
+            return 'Erro ao remover cliente'
+          }
+        },
+        success: {
+          render () {
+            return 'Cliente removido!'
+          }
+        }
+      }
+    )
+
+    removeClient(id)
+  }
+
+  function selectClientToEditData (id: string): void {
+    const client = clients.find(client => client.id === id)
+    if (client == null) return
+    setCurrentClient(client)
   }
 
   return (
     <Container>
-      <Main>
+      <Main sidebarOpened={currentClient !== null || registerClientSidebarOpen}>
         <header>
           <h2>Clientes</h2>
-          <button>
+          <button onClick={() => setRegisterClientSidebarOpen(true)}>
             Adicionar cliente
           </button>
         </header>
-        <Clients>
-          <div className="client">
-            <span>Jonas Albuquerque</span>
-            <Actions>
-              <button onClick={toggleSidebar}>
-                <MdRemoveRedEye />
-              </button>
-              <button className='delete'>
-                <MdDelete />
-              </button>
-            </Actions>
-          </div>
-        </Clients>
+        {!loading && (
+          <Clients>
+            {clients.map(client => (
+              <div key={client.id} className="client">
+                <span>{client.name}</span>
+                <Actions>
+                  <button onClick={() => selectClientToEditData(client.id)}>
+                    <MdRemoveRedEye />
+                  </button>
+                  <button onClick={() => deleteClient(client.id)} className='delete'>
+                    <MdDelete />
+                  </button>
+                </Actions>
+              </div>
+            ))}
+          </Clients>
+        )}
       </Main>
-      <Sidebar open={sidebarVisible}>
-        <div className="content">
-          <header>
-            <h3>Jonas Albuquerque</h3>
-            <button onClick={toggleSidebar}>
-              <MdOutlineClose />
-            </button>
-          </header>
-          <Form>
-            <span>Dados pessoais</span>
-            <input type="text" placeholder='Nome' />
-            <input type="text" placeholder='Email' />
-            <input type="text" placeholder='Telefone' />
-            <input type="text" placeholder='Endereço' />
-            <input type="text" placeholder='CPF' />
-          </Form>
-
-          <button>
-            Salvar alterações
-          </button>
-        </div>
-      </Sidebar>
+      <EditClientSidebar isOpen={currentClient !== null} data={currentClient} close={() => setCurrentClient(null)} />
+      <RegisterClientSidebar onCreate={(client) => addClient(client)} open={registerClientSidebarOpen} close={() => setRegisterClientSidebarOpen(false)} />
     </Container>
   )
 }

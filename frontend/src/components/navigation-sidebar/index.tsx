@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 
 import { useUserStore } from '../../store/userStore'
 
-export function Sidebar (): JSX.Element | null {
+export function NavigationSidebar (): JSX.Element | null {
   const { pathname } = useLocation()
   const { signOut, username } = useUserStore(state => state)
 

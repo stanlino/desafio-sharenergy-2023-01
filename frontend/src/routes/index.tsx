@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { Sidebar } from '../components/sidebar'
+import { NavigationSidebar } from '../components/navigation-sidebar'
 
 import { NotFoundPage } from '../pages/404'
 import { UsersPage } from '../pages/users'
@@ -15,7 +15,7 @@ import { ProtectedLogin } from './protected-login'
 export function AppRoutes (): JSX.Element {
   return (
     <BrowserRouter>
-      <Sidebar />
+      <NavigationSidebar />
       <Routes>
         <Route element={<ProtectedLogin />}>
           <Route path="/" element={<LoginPage />} />

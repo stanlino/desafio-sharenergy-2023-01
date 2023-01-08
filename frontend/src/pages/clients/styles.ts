@@ -6,10 +6,18 @@ export const Container = styled.div`
   flex: 1;
 `
 
-export const Main = styled.main`
+interface MainProps {
+  sidebarOpened: boolean
+}
+
+export const Main = styled.main<MainProps>`
   display: flex;
   flex: 1;
   flex-direction: column;
+
+  @media (max-width: 720px) {
+    display: ${({ sidebarOpened = true }) => sidebarOpened ? 'none' : 'flex'};
+  }
 
   header {
     display: flex;
@@ -92,93 +100,5 @@ export const Actions = styled.div`
       background-color: ${darken(0.1, 'red')};
       color: white;
     }
-  }
-`
-
-interface SidebarProps {
-  open: boolean
-}
-
-export const Sidebar = styled.aside<SidebarProps>`
-  background-color: #f4f4f4;
-  width: 300px;
-
-  box-shadow: -1px -1px 3px rgba(0,0,0,.2);
-
-  display: ${({ open }) => open ? 'flex' : 'none'};
-
-  .content {
-    position: fixed;
-
-    right: 0;
-    top: 0;
-
-    width: 300px;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    padding: 16px;
-
-    header {
-      display: flex;
-      flex-direction: row;
-
-      justify-content: space-between;
-    }
-
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: white;
-
-    font-weight: 700;
-    font-size: 16px;
-
-    &:hover {
-      background-color: ${darken(0.1, '#1BA2A1')};
-    }
-  }
-
-  @media (max-width: 900px) {
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-  } 
-`
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-
-  flex: 1;
-
-  margin: 16px 0;
-
-  span {
-    margin-bottom: 8px;
-  }
-
-  input {
-    margin-bottom: 8px;
-
-    height: 40px;
-    padding: 0 8px;
-
-    border: 1px solid #ccc;
-    border-radius: 8px;
-
-    outline-color: var(--primary-color);
   }
 `

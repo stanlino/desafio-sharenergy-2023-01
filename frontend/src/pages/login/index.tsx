@@ -23,16 +23,7 @@ export function LoginPage (): JSX.Element {
 
     const statusCode = await signIn({ username, password })
 
-    if (statusCode === 404) {
-      usernameInputRef.current.focus()
-      setError(404)
-      return
-    }
-
-    if (statusCode === 301) {
-      passwordInputRef.current.focus()
-      setError(301)
-    }
+    setError(statusCode)
   }
 
   return (
@@ -47,11 +38,12 @@ export function LoginPage (): JSX.Element {
           <span className='error'>
             {error === 404 && 'Usuário não existe!'}
             {error === 301 && 'Credenciais incorretas!'}
+            {error === 500 && 'Servidor fora do ar :('}
           </span>
 
           <label className='input-text-label' htmlFor="username-input">
             <BiUserCircle />
-            <input required ref={usernameInputRef} placeholder='Usuário' type="text" id="username-input" />
+            <input required autoComplete='off' ref={usernameInputRef} placeholder='Usuário' type="text" id="username-input" />
           </label>
           <label className='input-text-label' htmlFor="password-input">
             <BiLockAlt />
