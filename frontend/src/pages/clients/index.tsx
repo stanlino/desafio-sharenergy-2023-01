@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { MdRemoveRedEye, MdDelete } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import { ClientsActivityIndicator } from '../../components/clients-activity-indicator'
+import { ClientsListEmpty } from '../../components/clients-list-empty'
 import { EditClientSidebar } from '../../components/edit-client-sidebar'
 import { RegisterClientSidebar } from '../../components/register-client-sidebar'
 import { ClientDTO } from '../../dtos/Client'
@@ -54,13 +55,13 @@ export function ClientsPage (): JSX.Element {
         <header>
           <h2>Clientes</h2>
           <button onClick={() => setRegisterClientSidebarOpen(true)}>
-            Adicionar cliente
+            Cadastrar cliente
           </button>
         </header>
         <Clients>
           {loading
             ? <ClientsActivityIndicator />
-            : clients.map(client => (
+            : clients.length > 0 && clients.map(client => (
             <div key={client.id} className="client">
               <span>{client.name}</span>
               <Actions>
@@ -73,6 +74,7 @@ export function ClientsPage (): JSX.Element {
               </Actions>
             </div>
             ))}
+          {clients.length < 1 && !loading && <ClientsListEmpty />}
         </Clients>
       </Main>
       <EditClientSidebar onUpdate={(client) => updateClient(client)} isOpen={currentClient !== null} data={currentClient} close={() => setCurrentClient(null)} />
