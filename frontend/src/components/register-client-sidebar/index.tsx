@@ -20,6 +20,14 @@ export function RegisterClientSidebar ({ open, close, onCreate }: RegisterClient
   const userAddressInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
   const userCPFInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
 
+  function resetInputs (): void {
+    userNameInputRef.current.value = ''
+    userEmailInputRef.current.value = ''
+    userPhoneInputRef.current.value = ''
+    userAddressInputRef.current.value = ''
+    userCPFInputRef.current.value = ''
+  }
+
   async function registerNewClient (event: FormEvent): Promise<void> {
     event.preventDefault()
 
@@ -55,6 +63,7 @@ export function RegisterClientSidebar ({ open, close, onCreate }: RegisterClient
         },
         success: {
           render ({ data }) {
+            resetInputs()
             onCreate(data?.data as ClientDTO)
             close()
             return 'Cliente cadastrado!'
@@ -76,11 +85,26 @@ export function RegisterClientSidebar ({ open, close, onCreate }: RegisterClient
         <Form onSubmit={registerNewClient}>
           <div>
             <span>Dados pessoais</span>
-            <input ref={userNameInputRef} type="text" placeholder='Nome' title='Nome' required />
-            <input ref={userEmailInputRef} type="text" placeholder='Email' required />
-            <input ref={userPhoneInputRef} type="text" placeholder='Telefone' required />
-            <input ref={userAddressInputRef} type="text" placeholder='Endereço' required />
-            <input ref={userCPFInputRef} type="text" placeholder='CPF' required />
+            <label>
+              Nome
+              <input ref={userNameInputRef} type="text" placeholder='Jonas Albuquerque' title='Nome' required />
+            </label>
+            <label>
+              Email
+              <input ref={userEmailInputRef} type="text" placeholder='jonas.albuquerque@gmail.com' required />
+            </label>
+            <label>
+              Telefone
+              <input ref={userPhoneInputRef} type="text" placeholder='99 99999 9999' required />
+            </label>
+            <label>
+              Endereço
+              <input ref={userAddressInputRef} type="text" placeholder='Rua 16, Avenida 15, Bairro Tal' required />
+            </label>
+            <label>
+              CPF
+              <input ref={userCPFInputRef} type="text" placeholder='000 000 000 00' required />
+            </label>
           </div>
 
           <button type='submit'>

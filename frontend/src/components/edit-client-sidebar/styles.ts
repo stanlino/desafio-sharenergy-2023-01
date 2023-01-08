@@ -57,8 +57,16 @@ export const Form = styled.form`
     margin-bottom: 8px;
   }
 
-  input {
+  label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    font-size: 12px;
     margin-bottom: 8px;
+  }
+
+  input {
 
     height: 40px;
     padding: 0 8px;

@@ -17,6 +17,8 @@ interface EditClientSidebarProps {
 export function EditClientSidebar ({ isOpen, data, close, onUpdate }: EditClientSidebarProps): JSX.Element {
   const [editable, setEditable] = useState(false)
 
+  console.log(data)
+
   const userNameInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
   const userEmailInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
   const userPhoneInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
@@ -64,7 +66,7 @@ export function EditClientSidebar ({ isOpen, data, close, onUpdate }: EditClient
           }
         },
         success: {
-          render ({ data }) {
+          render () {
             onUpdate(clientUpdated as ClientDTO)
             handleClose()
             return 'Cliente atualizado!'
@@ -85,13 +87,31 @@ export function EditClientSidebar ({ isOpen, data, close, onUpdate }: EditClient
         </header>
         <Form>
           <span>Dados pessoais</span>
-          <input type="text" disabled={true} defaultValue={data?.id} placeholder='Id' required/>
-          <input type="text" ref={userNameInputRef} disabled={!editable} defaultValue={data?.name} placeholder='Nome' required/>
-          <input type="text" ref={userEmailInputRef} disabled={!editable} defaultValue={data?.email} placeholder='Email' required/>
-          <input type="text" ref={userPhoneInputRef} disabled={!editable} defaultValue={data?.phone} placeholder='Telefone' required/>
-          <input type="text" ref={userAddressInputRef} disabled={!editable} defaultValue={data?.address} placeholder='Endereço' required/>
-          <input type="text" ref={userCPFInputRef} disabled={!editable} defaultValue={data?.cpf} placeholder='CPF' required/>
-        </Form>
+          <label>
+            ID
+            <input type="text" disabled={true} defaultValue={data?.id} placeholder='Id' required/>
+          </label>
+          <label>
+            Nome
+            <input type="text" ref={userNameInputRef} disabled={!editable} defaultValue={data?.name} placeholder='Jonas Albuquerque' required/>
+          </label>
+          <label>
+            Email
+            <input type="text" ref={userEmailInputRef} disabled={!editable} defaultValue={data?.email} placeholder='jonas.albuquerque@gmail.com' required/>
+          </label>
+          <label>
+            Telefone
+            <input type="text" ref={userPhoneInputRef} disabled={!editable} defaultValue={data?.phone} placeholder='99 99999 9999' required/>
+          </label>
+          <label>
+            Endereço
+            <input type="text" ref={userAddressInputRef} disabled={!editable} defaultValue={data?.address} placeholder='Rua 16, Avenida 15, Bairro Tal' required/>
+          </label>
+          <label>
+            CPF
+            <input type="text" ref={userCPFInputRef} disabled={!editable} defaultValue={data?.cpf} placeholder='000 000 000 00' required/>
+        </label></
+        Form>
 
         <Button onClick={editable ? updateClientData : turnOnEditable}>
           {editable ? 'Atualizar cliente' : 'Editar dados do cliente'}
