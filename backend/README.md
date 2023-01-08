@@ -1,4 +1,4 @@
-<h1 align="center">Desafio Share Energy</h1>
+<h1 align="center">Backend</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1-blue.svg?cacheSeconds=2592000" />
 </p>
@@ -8,26 +8,19 @@
 ## Install
 
 ```sh
-cd backend && yarn
-```
-
-```sh
-cd frontend && yarn
+yarn
 ```
 
 ## Usage
 
 ```sh
-cd backend && yarn dev
-```
-```sh
-cd frontend && yarn dev
+yarn dev
 ```
 
 ## Run tests
 
 ```sh
-cd backend && yarn test
+yarn test
 ```
 
 ## Author
