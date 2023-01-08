@@ -33,7 +33,7 @@ export function NavigationSidebar (): JSX.Element | null {
         <Nav>
           <ul>
             <li>
-              <A to='/users' focused={isFocused('/users')}>
+              <A to='/users/1' focused={isFocused('/users')}>
                 <FaUsers />
                 <span>
                   Usuários

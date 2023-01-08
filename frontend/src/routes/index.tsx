@@ -22,9 +22,7 @@ export function AppRoutes (): JSX.Element {
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="*" element={<NotFoundPage />} />
-          <Route path="/users" element={<UsersPage />}>
-            <Route path=':page' element={<UsersPage />} />
-          </Route>
+          <Route path="/users/:page" element={<UsersPage />} />
           <Route path="/http-cat" element={<HTTPCatPage />} />
           <Route path="/random-dog" element={<RandomDogPage />} />
           <Route path="/clients" element={<ClientsPage />} />
