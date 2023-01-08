@@ -44,7 +44,7 @@ export function HTTPCatPage (): JSX.Element {
       <div className="content">
         <img src={image.src} alt={image.alt} />
         <Form onSubmit={handleSubmit}>
-          <input ref={inputRef} type="text" placeholder='Escreva um código HTTP' />
+          <input ref={inputRef} type="text" placeholder='Escreva um código HTTP' required />
           <button type='submit'>Pesquisar</button>
         </Form>
       </div>
