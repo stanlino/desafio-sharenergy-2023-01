@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { UsersActivityIndicator } from '../../components/users-activity-indicator'
 import { useFetchUsers } from '../../hooks/useFetchUsers'
 import { Action, Actions, Container, Table } from './styles'
 
@@ -38,7 +39,9 @@ export function UsersPage (): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {!loading && filteredUsers.map(user => (
+          {loading
+            ? <UsersActivityIndicator />
+            : filteredUsers.length > 0 && filteredUsers.map(user => (
             <tr key={user.login.username}>
               <td>
                 <img src={user.picture.medium} alt={`Imagem de avatar de ${user.name.first}`} />
@@ -54,7 +57,7 @@ export function UsersPage (): JSX.Element {
                 {user.dob.age} anos
               </td>
             </tr>
-          ))}
+            ))}
         </tbody>
       </Table>
       <Actions>
