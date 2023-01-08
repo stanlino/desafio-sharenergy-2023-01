@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { MdRemoveRedEye, MdDelete } from 'react-icons/md'
 import { toast } from 'react-toastify'
+import { ClientsActivityIndicator } from '../../components/clients-activity-indicator'
 import { EditClientSidebar } from '../../components/edit-client-sidebar'
 import { RegisterClientSidebar } from '../../components/register-client-sidebar'
 import { ClientDTO } from '../../dtos/Client'
@@ -56,23 +57,23 @@ export function ClientsPage (): JSX.Element {
             Adicionar cliente
           </button>
         </header>
-        {!loading && (
-          <Clients>
-            {clients.map(client => (
-              <div key={client.id} className="client">
-                <span>{client.name}</span>
-                <Actions>
-                  <button onClick={() => selectClientToEditData(client.id)}>
-                    <MdRemoveRedEye />
-                  </button>
-                  <button onClick={() => deleteClient(client.id)} className='delete'>
-                    <MdDelete />
-                  </button>
-                </Actions>
-              </div>
+        <Clients>
+          {loading
+            ? <ClientsActivityIndicator />
+            : clients.map(client => (
+            <div key={client.id} className="client">
+              <span>{client.name}</span>
+              <Actions>
+                <button onClick={() => selectClientToEditData(client.id)}>
+                  <MdRemoveRedEye />
+                </button>
+                <button onClick={() => deleteClient(client.id)} className='delete'>
+                  <MdDelete />
+                </button>
+              </Actions>
+            </div>
             ))}
-          </Clients>
-        )}
+        </Clients>
       </Main>
       <EditClientSidebar onUpdate={(client) => updateClient(client)} isOpen={currentClient !== null} data={currentClient} close={() => setCurrentClient(null)} />
       <RegisterClientSidebar onCreate={(client) => addClient(client)} open={registerClientSidebarOpen} close={() => setRegisterClientSidebarOpen(false)} />
