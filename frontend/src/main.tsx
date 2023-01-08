@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import 'react-toastify/dist/ReactToastify.css'
 
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ToastContainer } from 'react-toastify'
 import { useAxiosConfig } from './hooks/useAxiosConfig'

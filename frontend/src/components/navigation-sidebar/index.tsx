@@ -5,10 +5,12 @@ import { A, Container, Content, Footer, Nav } from './styles'
 import { useLocation } from 'react-router-dom'
 
 import { useUserStore } from '../../store/userStore'
+import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 
 export function NavigationSidebar (): JSX.Element | null {
   const { pathname } = useLocation()
   const { signOut, username } = useUserStore(state => state)
+  useDocumentTitle()
 
   function isFocused (path: string): number {
     return pathname.includes(path) ? 1 : 0
