@@ -1,12 +1,15 @@
 import { FormEvent, useRef, useState } from 'react'
 import { BiUserCircle, BiLockAlt } from 'react-icons/bi'
+import { Button } from '../../components/button'
 import { useUserStore } from '../../store/userStore'
-import { Button, Container, FormHeader } from './styles'
+import { Container, FormHeader } from './styles'
 
 export function LoginPage (): JSX.Element {
   const usernameInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
   const persistCheckboxRef = useRef<HTMLInputElement>(null)
+
+  const [authLoading, setAuthLoading] = useState(false)
 
   const [error, setError] = useState(0)
 
@@ -14,6 +17,7 @@ export function LoginPage (): JSX.Element {
 
   const handleSubmit = async (event: FormEvent): Promise<void> => {
     setError(0)
+    setAuthLoading(true)
 
     event.preventDefault()
 
@@ -24,6 +28,10 @@ export function LoginPage (): JSX.Element {
     const { checked: persist } = persistCheckboxRef.current
 
     const statusCode = await signIn({ username, password, persist })
+
+    if (statusCode === 200) return
+
+    setAuthLoading(false)
 
     setError(statusCode)
   }
@@ -56,8 +64,8 @@ export function LoginPage (): JSX.Element {
             <span>Lembre-se de mim</span>
           </label>
 
-          <Button>
-            Acessar
+          <Button disabled={authLoading}>
+            {authLoading ? 'Carregando ...' : 'Acessar'}
           </Button>
 
         </form>
