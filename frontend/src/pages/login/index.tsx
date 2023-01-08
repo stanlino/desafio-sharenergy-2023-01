@@ -6,6 +6,7 @@ import { Button, Container, FormHeader } from './styles'
 export function LoginPage (): JSX.Element {
   const usernameInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
+  const persistCheckboxRef = useRef<HTMLInputElement>(null)
 
   const [error, setError] = useState(0)
 
@@ -16,12 +17,13 @@ export function LoginPage (): JSX.Element {
 
     event.preventDefault()
 
-    if ((usernameInputRef.current == null) || (passwordInputRef.current == null)) return
+    if ((usernameInputRef.current === null) || (passwordInputRef.current === null) || (persistCheckboxRef.current === null)) return
 
     const { value: username } = usernameInputRef.current
     const { value: password } = passwordInputRef.current
+    const { checked: persist } = persistCheckboxRef.current
 
-    const statusCode = await signIn({ username, password })
+    const statusCode = await signIn({ username, password, persist })
 
     setError(statusCode)
   }
@@ -50,7 +52,7 @@ export function LoginPage (): JSX.Element {
             <input required ref={passwordInputRef} placeholder='Senha' type="password" id="password-input" />
           </label>
           <label className='input-checkbox-label' htmlFor="remember-me-checkbox">
-            <input type="checkbox" id="remember-me-checkbox" />
+            <input ref={persistCheckboxRef} type="checkbox" id="remember-me-checkbox" />
             <span>Lembre-se de mim</span>
           </label>
 
