@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { MdRemoveRedEye, MdDelete } from 'react-icons/md'
 import { toast } from 'react-toastify'
+import { Button } from '../../components/button'
 import { ClientsActivityIndicator } from '../../components/clients-activity-indicator'
 import { ClientsListEmpty } from '../../components/clients-list-empty'
 import { EditClientSidebar } from '../../components/edit-client-sidebar'
@@ -54,9 +55,9 @@ export function ClientsPage (): JSX.Element {
       <Main sidebarOpened={currentClient !== null || registerClientSidebarOpen}>
         <header>
           <h2>Clientes</h2>
-          <button onClick={() => setRegisterClientSidebarOpen(true)}>
+          <Button onClick={() => setRegisterClientSidebarOpen(true)}>
             Cadastrar cliente
-          </button>
+          </Button>
         </header>
         <Clients>
           {loading

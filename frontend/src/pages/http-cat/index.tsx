@@ -1,4 +1,5 @@
 import { useState, FormEvent, useRef } from 'react'
+import { Button } from '../../components/button'
 import { Container, Form } from './styles'
 
 const httpCodes = [
@@ -45,7 +46,7 @@ export function HTTPCatPage (): JSX.Element {
         <img src={image.src} alt={image.alt} />
         <Form onSubmit={handleSubmit}>
           <input ref={inputRef} type="text" placeholder='Escreva um código HTTP' required />
-          <button type='submit'>Pesquisar</button>
+          <Button type='submit'>Pesquisar</Button>
         </Form>
       </div>
     </Container>

@@ -78,7 +78,7 @@ export function EditClientSidebar ({ isOpen, data, close, onUpdate }: EditClient
     <Sidebar open={isOpen}>
       <div className="content">
         <header>
-          <h3>Editar cliente</h3>
+          <h3>{editable ? 'Editar cliente' : 'Sobre o cliente'}</h3>
           <Button onClick={handleClose}>
             <MdOutlineClose />
           </Button>

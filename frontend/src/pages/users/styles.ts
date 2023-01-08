@@ -1,5 +1,4 @@
-import { darken } from 'polished'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.main`
   display: flex;
@@ -104,21 +103,4 @@ export const Actions = styled.div`
   padding: 8px;
 
   gap: 1rem;
-`
-
-export const Action = styled.button`
-  height: 40px;
-  padding: 0 8px;
-  border-radius: 8px;
-  border: none;
-
-  cursor: pointer;
-  background-color: ${({ disabled = false }) => disabled ? 'grey' : css`var(--primary-color)`};
-  color: white;
-
-  font-weight: 700;
-
-  &:hover {
-    background-color: ${({ disabled = false }) => disabled ? 'grey' : darken(0.1, '#1BA2A1')};
-  }
 `

@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { Button } from '../../components/button'
 import { UsersActivityIndicator } from '../../components/users-activity-indicator'
 import { UsersListEmpty } from '../../components/users-list-empty'
 import { useFetchUsers } from '../../hooks/useFetchUsers'
-import { Action, Actions, Container, Table } from './styles'
+import { Actions, Container, Table } from './styles'
 
 export function UsersPage (): JSX.Element {
   const {
@@ -66,12 +67,12 @@ export function UsersPage (): JSX.Element {
                 </tbody>
               </Table>
               <Actions>
-                <Action disabled={currentPage === 1} onClick={handlePreviousPage}>
+                <Button disabled={currentPage === 1} onClick={handlePreviousPage}>
                   Página anterior
-                </Action>
-                <Action onClick={handleNextPage}>
+                </Button>
+                <Button onClick={handleNextPage}>
                   Próxima página
-                </Action>
+                </Button>
               </Actions>
             </>
           )}

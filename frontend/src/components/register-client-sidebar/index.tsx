@@ -3,6 +3,7 @@ import { MdOutlineClose } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import { ClientDTO } from '../../dtos/Client'
 import { api } from '../../services/api'
+import { Button } from '../button'
 import { Form, Sidebar } from './styles'
 
 type Errors = Record<string, string>
@@ -107,9 +108,9 @@ export function RegisterClientSidebar ({ open, close, onCreate }: RegisterClient
             </label>
           </div>
 
-          <button type='submit'>
+          <Button type='submit'>
             Cadastrar cliente
-          </button>
+          </Button>
         </Form>
       </div>
     </Sidebar>

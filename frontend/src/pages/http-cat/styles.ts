@@ -1,4 +1,3 @@
-import { darken } from 'polished'
 import styled from 'styled-components'
 
 export const Container = styled.main`
@@ -34,7 +33,7 @@ export const Form = styled.form`
     display: flex;
     flex: 1;
 
-    height: 32px;
+    height: 40px;
     border-radius: 8px;
 
     outline-color: var(--primary-color);
@@ -42,22 +41,5 @@ export const Form = styled.form`
     border: 1px solid #ccc;
 
     padding: 0 8px;
-  }
-
-  button {
-    border-radius: 8px;
-    border: none;
-
-    background-color: var(--primary-color);
-
-    padding: 0 8px;
-
-    color: white;
-
-    cursor: pointer;
-
-    &:hover {
-      background-color: ${darken(0.1, '#1BA2A1')};
-    }
   }
 `

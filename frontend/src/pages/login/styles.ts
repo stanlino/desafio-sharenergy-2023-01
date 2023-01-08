@@ -1,4 +1,3 @@
-import { lighten } from 'polished'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -106,28 +105,5 @@ export const FormHeader = styled.header`
   
   img {
     width: 200px;
-  }
-`
-
-export const Button = styled.button.attrs({
-  type: 'submit'
-})`
-  background-color: var(--primary-color);
-  color: white;
-  height: 40px;
-  outline: 0;
-  border: 0;
-  border-radius: 8px;
-
-  margin-bottom: 8px;
-
-  font-size: 18px;
-
-  cursor: pointer;
-
-  transition: all .4s;
-
-  &:hover {
-    background-color: ${lighten(0.1, '#1BA2A1')};
   }
 `

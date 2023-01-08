@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 
 import { useUserStore } from '../../store/userStore'
 import { useDocumentTitle } from '../../hooks/useDocumentTitle'
+import { Button } from '../button'
 
 export function NavigationSidebar (): JSX.Element | null {
   const { pathname } = useLocation()
@@ -68,12 +69,12 @@ export function NavigationSidebar (): JSX.Element | null {
         </Nav>
         <Footer>
           <span>@{username}</span>
-          <button onClick={handleLogOut}>
+          <Button onClick={handleLogOut}>
             <BsBoxArrowLeft />
             <span>
               Sair
             </span>
-          </button>
+          </Button>
         </Footer>
       </Content>
     </Container>

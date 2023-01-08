@@ -1,4 +1,3 @@
-import { darken } from 'polished'
 import { Link } from 'react-router-dom'
 
 import styled, { css } from 'styled-components'
@@ -124,30 +123,16 @@ export const Footer = styled.footer`
   gap: 0.5rem;
 
   button {
-    height: 40px;
-
-    background-color: var(--primary-color);
-    outline: 0;
-    border: 0;
-
-    border-radius: 8px;
-
-    color: white;
-
-    font-size: 16px;
+    
     font-weight: 700;
+
+    padding: 0;
 
     display: flex;
     gap: 0.5rem;
     
     align-items: center;
     justify-content: center;
-
-    cursor: pointer;
-
-    &:hover {
-      background-color: ${darken(0.1, '#1BA2A1')};
-    }
   }
 
   @media (max-width: 720px) {
