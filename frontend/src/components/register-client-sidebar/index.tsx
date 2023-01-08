@@ -79,9 +79,9 @@ export function RegisterClientSidebar ({ open, close, onCreate }: RegisterClient
       <div className="content">
         <header>
           <h3>Cadastrar cliente</h3>
-          <button onClick={close}>
+          <Button onClick={close}>
             <MdOutlineClose />
-          </button>
+          </Button>
         </header>
         <Form onSubmit={registerNewClient}>
           <div>

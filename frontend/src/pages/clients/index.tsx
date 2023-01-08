@@ -16,10 +16,17 @@ export function ClientsPage (): JSX.Element {
   const [currentClient, setCurrentClient] = useState<ClientDTO | null>(null)
 
   const [registerClientSidebarOpen, setRegisterClientSidebarOpen] = useState(false)
+  const [clientToDelete, setClientToDelete] = useState<string | null>(null)
 
   const { clients, loading, addClient, removeClient, updateClient } = useRequestClients()
 
   async function deleteClient (id: string): Promise<void> {
+    if (clientToDelete !== id) return setClientToDelete(id)
+
+    if (currentClient?.id === id) {
+      setCurrentClient(null)
+    }
+
     await toast.promise(
       api.delete(`/clients/${id}`),
       {
@@ -44,9 +51,17 @@ export function ClientsPage (): JSX.Element {
     removeClient(id)
   }
 
+  function openRegisterClientSidebar (): void {
+    setCurrentClient(null)
+    setClientToDelete(null)
+    setRegisterClientSidebarOpen(true)
+  }
+
   function selectClientToEditData (id: string): void {
     const client = clients.find(client => client.id === id)
     if (client == null) return
+    setRegisterClientSidebarOpen(false)
+    setClientToDelete(null)
     setCurrentClient(client)
   }
 
@@ -55,7 +70,7 @@ export function ClientsPage (): JSX.Element {
       <Main sidebarOpened={currentClient !== null || registerClientSidebarOpen}>
         <header>
           <h2>Clientes</h2>
-          <Button onClick={() => setRegisterClientSidebarOpen(true)}>
+          <Button onClick={openRegisterClientSidebar}>
             Cadastrar cliente
           </Button>
         </header>
@@ -71,6 +86,7 @@ export function ClientsPage (): JSX.Element {
                 </button>
                 <button onClick={() => deleteClient(client.id)} className='delete'>
                   <MdDelete />
+                  {clientToDelete === client.id && <span>Confirmar remoção</span>}
                 </button>
               </Actions>
             </div>

@@ -86,6 +86,8 @@ export const Actions = styled.div`
     font-weight: 700;
     font-size: 16px;
 
+    transition: all .4s;
+
     &:hover {
       background-color: ${darken(0.1, '#1BA2A1')};
       color: white;
@@ -95,6 +97,11 @@ export const Actions = styled.div`
   .delete {
     border: 1px solid red;
     color: red;
+     
+    span {
+      font-size: 14px;
+      margin-left: 5px;
+    }
 
     &:hover {
       background-color: ${darken(0.1, 'red')};
