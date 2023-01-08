@@ -74,14 +74,14 @@ export const Nav = styled.nav`
 `
 
 interface Aprops {
-  focused: boolean
+  focused: number
 }
 
 export const A = styled(Link) <Aprops>`
   text-decoration: none;
 
-  ${({ focused }) => {
-    if (focused) {
+  ${({ focused = 0 }) => {
+    if (focused === 1) {
       return css`
         color: var(--primary-color);
       `

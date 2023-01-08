@@ -15,7 +15,6 @@ export function ClientsPage (): JSX.Element {
   const [registerClientSidebarOpen, setRegisterClientSidebarOpen] = useState(false)
 
   const { clients, loading, addClient, removeClient } = useRequestClients()
-  console.log(clients)
 
   async function deleteClient (id: string): Promise<void> {
     await toast.promise(

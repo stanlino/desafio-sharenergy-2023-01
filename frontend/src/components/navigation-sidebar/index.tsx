@@ -10,8 +10,8 @@ export function NavigationSidebar (): JSX.Element | null {
   const { pathname } = useLocation()
   const { signOut, username } = useUserStore(state => state)
 
-  function isFocused (path: string): boolean {
-    return pathname.includes(path)
+  function isFocused (path: string): number {
+    return pathname.includes(path) ? 1 : 0
   }
 
   function handleLogOut (): void {
