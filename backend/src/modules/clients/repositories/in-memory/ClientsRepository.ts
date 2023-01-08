@@ -8,10 +8,12 @@ export class ClientsRepositoryInMemory implements IClientsRepository {
     this.clients = []
   }
 
-  async create(props: Client): Promise<void> {
+  async create(props: Client): Promise<Client> {
     const client = new Client(props)
 
     this.clients.push(client)
+
+    return client
   }
 
   async listAll(): Promise<Client[]> {

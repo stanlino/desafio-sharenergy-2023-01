@@ -4,6 +4,9 @@ import { Client } from "../entities/Client";
 import { IClientsRepository } from "../repositories/IClients";
 
 interface IRequest extends Omit<Client, 'id'> { }
+interface IResponse {
+  client: Client
+}
 
 @injectable()
 export class CreateClientUseCase {
@@ -19,19 +22,23 @@ export class CreateClientUseCase {
     phone,
     address,
     cpf
-  }: IRequest): Promise<void> {
+  }: IRequest): Promise<IResponse> {
     if (!name || !email || !phone || !address || !cpf) throw new AppError('Missing arguments')
 
     const clientAlreadyExists = await this.clientsRepository.findByEmail(email)
 
     if (clientAlreadyExists) throw new AppError('Client already exists!')
 
-    await this.clientsRepository.create({
+    const client = await this.clientsRepository.create({
       name,
       email,
       phone,
       address,
       cpf
     })
+
+    return {
+      client
+    }
   }
 }

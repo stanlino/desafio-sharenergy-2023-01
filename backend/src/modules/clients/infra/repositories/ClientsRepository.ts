@@ -10,10 +10,12 @@ export class ClientsRepository implements IClientsRepository {
     this.repository = new PrismaClient()
   }
 
-  async create(props: Omit<Client, "id">): Promise<void> {
-    await this.repository.clients.create({
+  async create(props: Omit<Client, "id">): Promise<Client> {
+    const user = await this.repository.clients.create({
       data: props
     })
+
+    return user
   }
 
   async listAll(): Promise<Client[]> {

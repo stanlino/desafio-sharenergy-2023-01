@@ -14,7 +14,7 @@ export class CreateClientController {
 
     const createClientUseCase = container.resolve(CreateClientUseCase)
 
-    await createClientUseCase.execute({
+    const { client } = await createClientUseCase.execute({
       name,
       email,
       phone,
@@ -22,6 +22,6 @@ export class CreateClientController {
       cpf
     })
 
-    return response.status(201).send()
+    return response.status(201).json(client)
   }
 }

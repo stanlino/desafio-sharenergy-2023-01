@@ -1,7 +1,7 @@
 import { Client } from "../entities/Client";
 
 export interface IClientsRepository {
-  create(props: Omit<Client, 'id'>): Promise<void>
+  create(props: Omit<Client, 'id'>): Promise<Client>
   listAll(): Promise<Client[]>
   findByEmail(email: string): Promise<Client | null>
   findById(id: string): Promise<Client | null>
