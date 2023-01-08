@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Button, Container } from './styles'
+import { Button } from '../../components/button'
+import { Container } from './styles'
 
 export function RandomDogPage (): JSX.Element {
   const [image, setImage] = useState('/dog.svg')

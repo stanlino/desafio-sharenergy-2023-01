@@ -1,5 +1,4 @@
-import { darken } from 'polished'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.main`
   display: flex;
@@ -30,24 +29,5 @@ export const Container = styled.main`
       min-height: 300px;
       max-height: 500px;
     }
-  }
-`
-
-export const Button = styled.button`
-  height: 32px;
-
-  border-radius: 8px;
-  border: none;
-
-  background-color: ${({ disabled = false }) => disabled ? 'grey' : css`var(--primary-color)`};
-
-  padding: 0 8px;
-
-  color: white;
-
-  cursor: ${({ disabled = false }) => disabled ? 'auto' : 'pointer'};
-
-  &:hover {
-    background-color: ${({ disabled = false }) => disabled ? 'grey' : darken(0.1, '#1BA2A1')};
   }
 `

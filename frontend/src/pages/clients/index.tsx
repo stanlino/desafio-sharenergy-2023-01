@@ -14,7 +14,7 @@ export function ClientsPage (): JSX.Element {
 
   const [registerClientSidebarOpen, setRegisterClientSidebarOpen] = useState(false)
 
-  const { clients, loading, addClient, removeClient } = useRequestClients()
+  const { clients, loading, addClient, removeClient, updateClient } = useRequestClients()
 
   async function deleteClient (id: string): Promise<void> {
     await toast.promise(
@@ -74,7 +74,7 @@ export function ClientsPage (): JSX.Element {
           </Clients>
         )}
       </Main>
-      <EditClientSidebar isOpen={currentClient !== null} data={currentClient} close={() => setCurrentClient(null)} />
+      <EditClientSidebar onUpdate={(client) => updateClient(client)} isOpen={currentClient !== null} data={currentClient} close={() => setCurrentClient(null)} />
       <RegisterClientSidebar onCreate={(client) => addClient(client)} open={registerClientSidebarOpen} close={() => setRegisterClientSidebarOpen(false)} />
     </Container>
   )

@@ -8,6 +8,7 @@ interface UseRequestResponse {
   loading: boolean
   addClient: (client: ClientDTO) => void
   removeClient: (id: string) => void
+  updateClient: (client: ClientDTO) => void
 }
 
 export function useRequestClients (): UseRequestResponse {
@@ -36,10 +37,24 @@ export function useRequestClients (): UseRequestResponse {
     setClients(prevState => prevState.filter(client => client.id !== id))
   }
 
+  function updateClient (client: ClientDTO): void {
+    const clientExists = clients.find(item => item.id === client.id)
+
+    if (!clientExists) return
+
+    const newClients = [...clients]
+
+    const index = newClients.findIndex(item => item.id === client.id)
+    newClients[index] = client
+
+    setClients(newClients)
+  }
+
   return {
     clients,
     loading,
     addClient,
-    removeClient
+    removeClient,
+    updateClient
   }
 }

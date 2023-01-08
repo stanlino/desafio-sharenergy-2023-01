@@ -1,23 +1,77 @@
-import { useState } from 'react'
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+import { useState, useRef } from 'react'
 import { MdOutlineClose } from 'react-icons/md'
+import { toast } from 'react-toastify'
 import { ClientDTO } from '../../dtos/Client'
+import { api } from '../../services/api'
+import { Button } from '../button'
 import { Form, Sidebar } from './styles'
 
 interface EditClientSidebarProps {
   isOpen: boolean
   data: ClientDTO | null
   close: () => void
+  onUpdate: (client: ClientDTO) => void
 }
 
-export function EditClientSidebar ({ isOpen, data, close }: EditClientSidebarProps): JSX.Element {
+export function EditClientSidebar ({ isOpen, data, close, onUpdate }: EditClientSidebarProps): JSX.Element {
   const [editable, setEditable] = useState(false)
 
-  function toggleEditable (): void {
-    setEditable(editable => !editable)
+  const userNameInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
+  const userEmailInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
+  const userPhoneInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
+  const userAddressInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
+  const userCPFInputRef = useRef<HTMLInputElement>({} as HTMLInputElement)
+
+  function turnOnEditable (): void {
+    setEditable(true)
   }
 
-  function updateClientData (): void {
+  function handleClose (): void {
+    setEditable(false)
+    close()
+  }
 
+  async function updateClientData (): Promise<void> {
+    const { value: name } = userNameInputRef.current
+    const { value: email } = userEmailInputRef.current
+    const { value: phone } = userPhoneInputRef.current
+    const { value: address } = userAddressInputRef.current
+    const { value: cpf } = userCPFInputRef.current
+
+    const clientUpdated = {
+      id: data?.id,
+      name,
+      email,
+      phone,
+      address,
+      cpf
+    }
+
+    if (clientUpdated === data) return
+
+    await toast.promise(
+      api.patch(`/clients/${data?.id}`, clientUpdated),
+      {
+        pending: {
+          render () {
+            return 'Atualizando cliente'
+          }
+        },
+        error: {
+          render () {
+            return 'Erro ao atualizar cliente'
+          }
+        },
+        success: {
+          render ({ data }) {
+            onUpdate(clientUpdated as ClientDTO)
+            handleClose()
+            return 'Cliente atualizado!'
+          }
+        }
+      }
+    )
   }
 
   return (
@@ -25,22 +79,23 @@ export function EditClientSidebar ({ isOpen, data, close }: EditClientSidebarPro
       <div className="content">
         <header>
           <h3>Editar cliente</h3>
-          <button onClick={close}>
+          <Button onClick={handleClose}>
             <MdOutlineClose />
-          </button>
+          </Button>
         </header>
         <Form>
           <span>Dados pessoais</span>
-          <input type="text" disabled={!editable} placeholder='Nome' />
-          <input type="text" disabled={!editable} placeholder='Email' />
-          <input type="text" disabled={!editable} placeholder='Telefone' />
-          <input type="text" disabled={!editable} placeholder='Endereço' />
-          <input type="text" disabled={!editable} placeholder='CPF' />
+          <input type="text" disabled={true} defaultValue={data?.id} placeholder='Id' required/>
+          <input type="text" ref={userNameInputRef} disabled={!editable} defaultValue={data?.name} placeholder='Nome' required/>
+          <input type="text" ref={userEmailInputRef} disabled={!editable} defaultValue={data?.email} placeholder='Email' required/>
+          <input type="text" ref={userPhoneInputRef} disabled={!editable} defaultValue={data?.phone} placeholder='Telefone' required/>
+          <input type="text" ref={userAddressInputRef} disabled={!editable} defaultValue={data?.address} placeholder='Endereço' required/>
+          <input type="text" ref={userCPFInputRef} disabled={!editable} defaultValue={data?.cpf} placeholder='CPF' required/>
         </Form>
 
-        <button onClick={editable ? updateClientData : toggleEditable}>
+        <Button onClick={editable ? updateClientData : turnOnEditable}>
           {editable ? 'Atualizar cliente' : 'Editar dados do cliente'}
-        </button>
+        </Button>
       </div>
     </Sidebar>
   )

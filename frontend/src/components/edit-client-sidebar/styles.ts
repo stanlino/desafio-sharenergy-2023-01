@@ -1,4 +1,3 @@
-import { darken } from 'polished'
 import styled from 'styled-components'
 
 interface SidebarProps {
@@ -34,29 +33,6 @@ export const Sidebar = styled.aside<SidebarProps>`
       justify-content: space-between;
     }
 
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    height: 40px;
-
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: white;
-
-    font-weight: 700;
-    font-size: 16px;
-
-    &:hover {
-      background-color: ${darken(0.1, '#1BA2A1')};
-    }
   }
 
   @media (max-width: 900px) {
